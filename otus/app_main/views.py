@@ -5,11 +5,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 
-from .models import Curse
-from .serializers import CurseSerializer
+from app_main.models import Curse
+from app_main.serializers import CurseSerializer
 
 
-def index_appmain(request):
+def index_app_main(request):
     return HttpResponse('<h1>Hello to curse</h1>')
 
 
