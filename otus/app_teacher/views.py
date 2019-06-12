@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
@@ -15,4 +15,8 @@ class TeacherListView(APIView):
 
 
 class TeacherDetailListView(APIView):
-    pass
+
+    def get(self, request, pk):
+        teacher = get_object_or_404(Teacher, pk=pk)
+        serializer = TeacherSerializer(teacher)
+        return Response(serializer.data)

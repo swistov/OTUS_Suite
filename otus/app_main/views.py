@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 
-from app_main.models import Curse
-from app_main.serializers import CurseSerializer
+from app_main.models import Curse, Lesson
+from app_main.serializers import CurseSerializer, LessonSerializer
 
 
 def index_app_main(request):
@@ -16,7 +16,7 @@ def index_app_main(request):
 class CurseListView(APIView):
 
     def get(self, request):
-        curses = Curse.objects.all()
+        curses = Curse.objects.all().filter(enabled=True)
         serializer = CurseSerializer(curses, many=True)
         return Response(serializer.data)
 
@@ -29,6 +29,9 @@ class CurseListView(APIView):
 
 
 class CurseDetailListView(APIView):
+    """
+    GET: return curse detail
+    """
 
     def get(self, request, pk):
         curse = get_object_or_404(Curse, pk=pk)
@@ -41,3 +44,22 @@ class CurseDetailListView(APIView):
         data = serializer.data
         curse.delete()
         return Response(data, status=status.HTTP_202_ACCEPTED)
+
+
+class LessonListView(APIView):
+    """
+    GET: Return enabled list lessons
+    pk: Curse ID
+    """
+    def get(self, request, pk):
+        lesson = Lesson.objects.filter(curse=pk, enabled=True)
+        serialize = LessonSerializer(lesson, many=True)
+        return Response(serialize.data)
+
+
+class LessonDetailListView(APIView):
+
+    def get(self, request, pk):
+        lesson = get_object_or_404(Lesson, pk=pk)
+        serialize = LessonSerializer(lesson)
+        return Response(serialize.data)

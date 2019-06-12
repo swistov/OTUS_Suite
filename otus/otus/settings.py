@@ -30,6 +30,15 @@ INTERNAL_IPS = ['127.0.0.1']
 
 
 # Application definition
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,8 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'rest_framework',
+    'rest_framework.authtoken',
     'app_main.apps.AppmainConfig',
     'app_teacher.apps.AppteacherConfig',
+    'app_user.apps.AppUserConfig',
 ]
 
 MIDDLEWARE = [

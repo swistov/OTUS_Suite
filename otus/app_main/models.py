@@ -29,6 +29,10 @@ class Lesson(models.Model):
     date_time_release = models.DateTimeField()
     enabled = models.BooleanField()
 
+    @property
+    def curse_name(self):
+        return self.curse.name
+
     class Meta:
         ordering = ['id']
 
