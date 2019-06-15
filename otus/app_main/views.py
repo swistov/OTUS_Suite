@@ -44,15 +44,10 @@ class CurseDetailListView(APIView):
     def post(self, request, pk):
         serializer = ReservedCurseSerializer(data=request.data)
 
-        try:
-            reserved = ReservedCurse.objects.get(curse=pk, user=request.data.get('user'))
-        except ReservedCurse.DoesNotExist:
-            reserved = 0
-        except ReservedCurse:
-            reserved = 1
-
         if serializer.is_valid():
-            if reserved:
+            if ReservedCurse.objects.filter(curse=pk,
+                                            user=request.data.get('user')
+                                            ).exists():
                 return Response(serializer.data, status=status.HTTP_206_PARTIAL_CONTENT)
 
             serializer.save()
