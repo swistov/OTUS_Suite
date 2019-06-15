@@ -6,3 +6,8 @@ Install Django-Debug-Toolbar
 
     https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
     
+
+Credentials to admin portal
+    
+    login:      admin
+    password:   admin

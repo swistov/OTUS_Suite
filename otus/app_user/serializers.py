@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
+
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
+
+from app_user.models import ReservedCurse
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -19,3 +22,19 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
         Token.objects.create(user=user)
         return user
+
+
+class ReservedUserCurseSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ReservedCurse
+        fields = 'id', 'curse_name', 'reserved_date_time'
+
+    search_fields = ["curse_name"]
+
+
+class ReservedCurseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReservedCurse
+        fields = 'user', 'curse'
+

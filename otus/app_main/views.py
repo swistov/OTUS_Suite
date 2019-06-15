@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
@@ -7,6 +9,7 @@ from rest_framework import status
 
 from app_main.models import Curse, Lesson
 from app_main.serializers import CurseSerializer, LessonSerializer
+from app_user.serializers import ReservedCurseSerializer
 
 
 def index_app_main(request):
@@ -31,12 +34,21 @@ class CurseListView(APIView):
 class CurseDetailListView(APIView):
     """
     GET: return curse detail
+    POST: reserved curse
     """
 
     def get(self, request, pk):
         curse = get_object_or_404(Curse, pk=pk)
         serializer = CurseSerializer(curse)
         return Response(serializer.data)
+
+    def post(self, request, pk):
+        serializer = ReservedCurseSerializer(data=request.data, )
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
         curse = get_object_or_404(Curse, pk=pk)
