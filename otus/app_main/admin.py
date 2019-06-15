@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Curse, Lesson
+from app_main.models import Curse, Lesson
 
 
 @admin.register(Curse)
