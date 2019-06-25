@@ -1,8 +1,8 @@
 from django.urls import path
 
-from app_teacher import views
+from teacher import views
 
-app_name = 'app_teacher'
+app_name = 'teacher'
 
 urlpatterns = [
     path('api/teacher/', views.TeacherListView.as_view()),

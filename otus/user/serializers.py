@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-from app_user.models import ReservedCurse
+from user.models import ReservedCurse
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app_teacher.models import Teacher
+from teacher.models import Teacher
 
 
 class TeacherSerializer(serializers.ModelSerializer):

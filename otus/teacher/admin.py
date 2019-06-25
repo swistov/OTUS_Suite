@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app_teacher.models import Teacher
+from teacher.models import Teacher
 
 
 @admin.register(Teacher)

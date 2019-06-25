@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app_main', '0001_initial'),
+        ('main', '0001_initial'),
     ]
 
     operations = [
@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100)),
                 ('descriptions', models.TextField()),
                 ('enabled', models.BooleanField()),
-                ('curse', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app_main.Curse')),
+                ('curse', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.Curse')),
             ],
             options={
                 'ordering': ['id'],

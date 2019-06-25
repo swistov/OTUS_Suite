@@ -5,10 +5,10 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 
-from app_main.models import Curse, Lesson
-from app_main.serializers import CurseSerializer, LessonSerializer
-from app_user.models import ReservedCurse
-from app_user.serializers import ReservedCurseSerializer
+from main.models import Curse, Lesson
+from main.serializers import CurseSerializer, LessonSerializer
+from user.models import ReservedCurse
+from user.serializers import ReservedCurseSerializer
 
 
 def index_app_main(request):

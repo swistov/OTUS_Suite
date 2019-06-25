@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app_main.models import Curse, Lesson
+from main.models import Curse, Lesson
 
 
 class CurseSerializer(serializers.ModelSerializer):

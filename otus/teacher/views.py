@@ -2,8 +2,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from app_teacher.models import Teacher
-from app_teacher.serializers import TeacherSerializer
+from teacher.models import Teacher
+from teacher.serializers import TeacherSerializer
 
 
 class TeacherListView(APIView):

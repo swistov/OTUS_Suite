@@ -5,10 +5,10 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from app_user import serializers
+from user import serializers
 
-from app_user.models import ReservedCurse
-from app_user.serializers import ReservedUserCurseSerializer
+from user.models import ReservedCurse
+from user.serializers import ReservedUserCurseSerializer
 
 
 class UserCreateView(generics.CreateAPIView):

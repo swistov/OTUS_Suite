@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from app_user.models import ReservedCurse
+from user.models import ReservedCurse
 
 
 @admin.register(ReservedCurse)

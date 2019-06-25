@@ -50,9 +50,9 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'rest_framework',
     'rest_framework.authtoken',
-    'app_main.apps.AppmainConfig',
-    'app_teacher.apps.AppteacherConfig',
-    'app_user.apps.AppUserConfig',
+    'main.apps.AppmainConfig',
+    'teacher.apps.AppteacherConfig',
+    'user.apps.AppUserConfig',
 ]
 
 MIDDLEWARE = [
