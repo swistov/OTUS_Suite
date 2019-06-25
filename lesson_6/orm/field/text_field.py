@@ -1,2 +1,0 @@
-class TextField()
-    pass
