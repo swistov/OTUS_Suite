@@ -1,0 +1,2 @@
+class BooleanField():
+    pass
