@@ -59,7 +59,10 @@ class CurseDetailListView(APIView):
         curse = get_object_or_404(Curse, pk=pk)
         serializer = CurseSerializer(curse)
         data = serializer.data
-        curse.delete()
+        if request.user.is_staff:
+            curse.delete()
+        else:
+            return Response(data, status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
         return Response(data, status=status.HTTP_202_ACCEPTED)
 
 
