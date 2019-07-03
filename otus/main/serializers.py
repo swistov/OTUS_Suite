@@ -5,7 +5,13 @@ from main.models import Curse, Lesson
 class CurseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Curse
-        fields = 'id', 'name', 'descriptions', 'enabled'
+        fields = ('id', 'name', 'descriptions', 'date_time_release')
+
+
+class CursePostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Curse
+        fields = ('name', 'descriptions', 'date_time_release', 'enabled')
 
     enabled = serializers.BooleanField(required=False, default=False)
 

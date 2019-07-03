@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 
 from rest_framework.response import Response
@@ -6,24 +5,23 @@ from rest_framework.views import APIView
 from rest_framework import status
 
 from main.models import Curse, Lesson
-from main.serializers import CurseSerializer, LessonSerializer
+from main.serializers import CurseSerializer, LessonSerializer, CursePostSerializer
 from user.models import ReservedCurse
 from user.serializers import ReservedCurseSerializer
-
-
-def index_app_main(request):
-    return HttpResponse('<h1>Hello to curse</h1>')
 
 
 class CurseListView(APIView):
 
     def get(self, request):
-        curses = Curse.objects.all().filter(enabled=True)
+        curses = Curse.objects.all().filter(enabled=True).select_related()
         serializer = CurseSerializer(curses, many=True)
         return Response(serializer.data)
 
+
+class CurseCreateView(APIView):
+
     def post(self, request):
-        serializer = CurseSerializer(data=request.data)
+        serializer = CursePostSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -34,6 +32,7 @@ class CurseDetailListView(APIView):
     """
     GET: return curse detail
     POST: reserved curse
+    DELETE: delete curse
     """
 
     def get(self, request, pk):
