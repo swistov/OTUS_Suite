@@ -33,7 +33,6 @@ GET /curse/
     
 ### Info
 GET /curse/\<int:pk\>/
-* pk - curse ID
 
 
     {
@@ -42,7 +41,7 @@ GET /curse/\<int:pk\>/
         "descriptions": "Some info about curse",
         "date_time_release": "2019-07-03T11:19:44Z"
     }
- 
+ * pk - curse ID
  * id - curse ID
  * name - curse name
  * descriptions - info about curse
