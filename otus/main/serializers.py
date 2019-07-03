@@ -17,7 +17,6 @@ class CursePostSerializer(serializers.ModelSerializer):
 
 
 class LessonSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Lesson
         fields = 'id', 'name', 'curse_name', 'descriptions', 'date_time_release', 'enabled'

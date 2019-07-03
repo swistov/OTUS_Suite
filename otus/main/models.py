@@ -5,7 +5,6 @@ from teacher.models import Teacher
 
 
 class Curse(models.Model):
-
     name = models.CharField(max_length=100)
     descriptions = models.TextField()
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, default=None, null=True)
@@ -21,7 +20,6 @@ class Curse(models.Model):
 
 
 class Lesson(models.Model):
-
     name = models.CharField(max_length=100)
     curse = models.ForeignKey(Curse, on_delete=models.CASCADE)
     descriptions = models.TextField()

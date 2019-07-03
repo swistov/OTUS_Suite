@@ -43,7 +43,7 @@ GET /curse/\<int:pk\>/
     }
     
 ##### Request:
-* pk - curse ID in request
+* _pk_ - curse ID in request
 ##### Answer:
 * _id_ - curse ID
 * _name_ - curse name
