@@ -16,10 +16,9 @@ Credentials to admin portal
 # Curses
 All API request for managing curses  
 
-## All curses
+### All curses
 GET /curse/
 
-List of all curses
 
 ### Create
 **POST** /curse/create/
@@ -34,8 +33,7 @@ List of all curses
     
 ### Info
 GET /curse/\<int:pk\>/
-
- * pk - curse ID
+* pk - curse ID
 
 
     {
