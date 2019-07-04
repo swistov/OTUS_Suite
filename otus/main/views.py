@@ -72,7 +72,7 @@ class LessonListView(APIView):
     """
 
     def get(self, request, pk):
-        lesson = Lesson.objects.filter(curse=pk, enabled=True)
+        lesson = Lesson.objects.filter(curse=pk, enabled=True).select_related()
         serialize = LessonSerializer(lesson, many=True)
         return Response(serialize.data)
 

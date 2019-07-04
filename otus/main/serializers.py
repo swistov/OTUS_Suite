@@ -19,7 +19,7 @@ class CursePostSerializer(serializers.ModelSerializer):
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
-        fields = 'id', 'name', 'curse_name', 'descriptions', 'date_time_release', 'enabled'
+        fields = 'id', 'name', 'curse_name', 'descriptions', 'date_time_release'
 
     search_fields = ["curse__name"]
-    enabled = serializers.BooleanField(required=False, default=False)
+    # enabled = serializers.BooleanField(required=False, default=False)
