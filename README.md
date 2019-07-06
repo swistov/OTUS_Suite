@@ -66,7 +66,25 @@ GET /curse/\<int:pk\>/
 
 # User
 ### Register
+POST /user/create
+
+    {
+        "username": "newuser",
+        "email": "newuser@example.com",
+        "password": "New_Super_P@$$word"
+    }
+    
+In answer you get '201 Create'
+
 ### Login
+POST /user/login
+
+    {
+    "username": "admin",
+    "password": "admin"
+    }
+
+In answer you get token
 
 # Teacher
 ### Info

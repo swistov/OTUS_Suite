@@ -7,8 +7,8 @@ from rest_framework.views import APIView
 
 from user import serializers
 
-from user.models import ReservedCurse
-from user.serializers import ReservedUserCurseSerializer
+from user.models import ReservedCurse, OtusUser
+from user.serializers import ReservedUserCurseSerializer, OtusUserSerializer
 
 
 class UserCreateView(generics.CreateAPIView):
@@ -24,7 +24,8 @@ class UserLoginView(APIView):
         username = request.data.get('username')
         password = request.data.get('password')
         user = authenticate(username=username, password=password)
-
+        print()
+        print(f'USER: {user}')
         if user:
             return Response({'token': user.auth_token.key})
         else:
@@ -40,4 +41,12 @@ class ReservedUserCurseView(APIView):
     def get(self, request, pk):
         curses = get_object_or_404(ReservedCurse, user=pk)
         serializer = ReservedUserCurseSerializer(curses, many=True)
+        return Response(serializer.data)
+
+
+class UserInfoView(APIView):
+
+    def get(self, request, pk):
+        user = get_object_or_404(OtusUser, user=pk)
+        serializer = OtusUserSerializer(user)
         return Response(serializer.data)

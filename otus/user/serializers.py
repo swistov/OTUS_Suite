@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-from user.models import ReservedCurse
+from user.models import ReservedCurse, OtusUser
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -36,5 +36,14 @@ class ReservedUserCurseSerializer(serializers.ModelSerializer):
 class ReservedCurseSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReservedCurse
-        fields = 'user', 'curse'
+        fields = ('user', 'curse')
+
+
+class OtusUserSerializer(serializers.ModelSerializer):
+    first_name = serializers.ReadOnlyField(source='user.first_name')
+    last_name = serializers.ReadOnlyField(source='user.last_name')
+
+    class Meta:
+        model = OtusUser
+        fields = ('id', 'last_name', 'first_name', 'phone')
 
