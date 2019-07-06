@@ -46,4 +46,3 @@ class OtusUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = OtusUser
         fields = ('id', 'last_name', 'first_name', 'phone')
-
