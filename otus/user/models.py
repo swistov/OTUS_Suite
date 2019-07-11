@@ -6,7 +6,7 @@ from main.models import Curse
 
 
 class OtusUser(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='otus_user')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='otus_user')
     phone = models.CharField(max_length=11)
 
     class Meta:
@@ -18,8 +18,8 @@ class OtusUser(models.Model):
 
 class ReservedCurse(models.Model):
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_name')
-    curse = models.ForeignKey(Curse, on_delete=models.CASCADE, related_name='user_curse')
+    user = models.ForeignKey(OtusUser, on_delete=models.CASCADE, related_name='user_name')
+    curse = models.OneToOneField(Curse, on_delete=models.CASCADE, related_name='user_curse')
     reserved_date_time = models.DateTimeField(auto_now_add=datetime.now)
 
     @property

@@ -11,4 +11,3 @@ class CurseAdmin(admin.ModelAdmin):
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
     list_display = 'id', 'name', 'curse', 'date_time_release', 'enabled', 'add_date'
-
