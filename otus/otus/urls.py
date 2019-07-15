@@ -22,6 +22,7 @@ urlpatterns = [
     path('curse/', include('main.urls')),
     path('teacher/', include('teacher.urls')),
     path('user/', include('user.urls')),
+    path('rq/', include('django_rq.urls'))
 ]
 
 if settings.DEBUG:

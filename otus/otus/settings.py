@@ -47,9 +47,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'debug_toolbar',
     'rest_framework',
     'rest_framework.authtoken',
+    'django_rq',
+
     'main.apps.AppmainConfig',
     'teacher.apps.AppteacherConfig',
     'user.apps.AppUserConfig',
@@ -135,3 +138,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': '',
+        'PORT': 6379,
+        'DB': 0,
+        'PASSWORD': ''
+    }
+}

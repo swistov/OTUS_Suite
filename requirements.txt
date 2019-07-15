@@ -9,3 +9,5 @@ sqlparse==0.3.0
 text-unidecode==1.2
 rq
 requests
+rq-scheduler
+django-rq
