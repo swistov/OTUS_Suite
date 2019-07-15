@@ -53,9 +53,13 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_rq',
 
-    'main.apps.AppmainConfig',
-    'teacher.apps.AppteacherConfig',
-    'user.apps.AppUserConfig',
+    # 'main.apps.AppmainConfig',
+    # 'teacher.apps.AppteacherConfig',
+    # 'user.apps.AppUserConfig',
+    'main',
+    'teacher',
+    'user',
+
 ]
 
 MIDDLEWARE = [
