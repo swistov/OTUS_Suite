@@ -18,3 +18,8 @@ def update_currency_rate():
         rate.save(update_fields=['rate'])
 
     return True
+
+
+@job('high')
+def send_email(email_text, user_id):
+    pass

@@ -1,11 +1,11 @@
-import os
-import redis
-
+from redis import Redis
 from rq import Worker, Queue, Connection
 
 listen = ['high', 'default', 'low']
-redis_url = os.getenv('REDISTOGO_URL', 'redis://192.168.12.156:6379')
-conn = redis.from_url(redis_url)
+conn = Redis(host='195.201.131.110',
+                   port=6379,
+                   password='a5ff74c136c8e7b58f0850dfe19b15b70b75e8e22892da4d261131f7327dcd81')
+
 
 if __name__ == '__main__':
     with Connection(conn):

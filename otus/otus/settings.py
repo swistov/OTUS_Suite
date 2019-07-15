@@ -141,9 +141,15 @@ STATIC_URL = '/static/'
 
 RQ_QUEUES = {
     'default': {
-        'HOST': '',
+        'HOST': '195.201.131.110',
         'PORT': 6379,
         'DB': 0,
-        'PASSWORD': ''
+        'PASSWORD': 'a5ff74c136c8e7b58f0850dfe19b15b70b75e8e22892da4d261131f7327dcd81'
+    },
+    'high': {
+        'HOST': '195.201.131.110',
+        'PORT': 6379,
+        'DB': 0,
+        'PASSWORD': 'a5ff74c136c8e7b58f0850dfe19b15b70b75e8e22892da4d261131f7327dcd81'
     }
 }
