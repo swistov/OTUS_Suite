@@ -11,3 +11,4 @@ rq
 requests
 rq-scheduler
 django-rq
+ipython
