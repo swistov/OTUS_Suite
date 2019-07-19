@@ -28,10 +28,11 @@ def update_currency_rate():
 
 @job('high')
 def send_simple_message():
-    return requests.post(
+    send = requests.post(
         "https://api.mailgun.net/v3/sandbox1432a76c6cbe403db25aa89a09eb0fa3.mailgun.org/messages",
         auth=("api", "722a8cb7b417f3030fdf1779a6122ca3-fd0269a6-a05c6376"),
         data={"from": "Excited User <mailgun@sandbox1432a76c6cbe403db25aa89a09eb0fa3.mailgun.org>",
-              "to": ['swip88@bk.ru', ],
+              "to": ['swip88@bk.ru', "swistov@sandbox1432a76c6cbe403db25aa89a09eb0fa3.mailgun.org"],
               "subject": "Hello",
               "text": "Testing some Mailgun awesomness!"})
+    return send

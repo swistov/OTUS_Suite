@@ -34,6 +34,7 @@ class UserLoginView(APIView):
 
 class ReservedUserCurseView(APIView):
     """
+    TODO: Reserv curse
     RETURN:
     get: return all reserved user curses
     pk: user_id
@@ -42,6 +43,20 @@ class ReservedUserCurseView(APIView):
         curses = get_object_or_404(ReservedCurse, user=pk)
         serializer = ReservedUserCurseSerializer(curses, many=True)
         return Response(serializer.data)
+
+
+class ReserveCurseView(APIView):
+
+    def post(self, request, pk):
+        user = get_object_or_404(OtusUser, user=request.user)
+        curse = get_object_or_404(ReservedCurse, user=user)
+
+        if pk not in [p.id for p in curse.curse.all()]:
+            curse.curse.add(pk)
+            return Response(status=status.HTTP_201_CREATED)
+
+        return Response(data=f'User {request.user} already reserved this curse',
+                        status=status.HTTP_409_CONFLICT)
 
 
 class UserInfoView(APIView):
@@ -54,7 +69,7 @@ class UserInfoView(APIView):
 
     def post(self, request, pk):
         """
-        TODO: Update first_name and last_name
+        TODO: Update user info
         """
         user = get_object_or_404(OtusUser, user=pk)
         serializer = OtusUserSerializer(data=request.data)

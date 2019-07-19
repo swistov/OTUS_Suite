@@ -5,7 +5,11 @@ from user.models import ReservedCurse, OtusUser
 
 @admin.register(ReservedCurse)
 class ReservedCurseAdmin(admin.ModelAdmin):
-    list_display = 'id', 'user', 'curse', 'reserved_date_time'
+    list_display = 'id', 'user', 'get_curses_str', 'reserved_date_time'
+
+    def get_curses_str(self, obj):
+        return ' '.join(obj.curse.all().values_list("name", flat=True))
+    get_curses_str.short_description = 'Curses'
 
 
 @admin.register(OtusUser)

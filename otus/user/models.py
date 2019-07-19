@@ -18,8 +18,8 @@ class OtusUser(models.Model):
 
 class ReservedCurse(models.Model):
 
-    user = models.ForeignKey(OtusUser, on_delete=models.CASCADE, related_name='user_name')
-    curse = models.OneToOneField(Curse, on_delete=models.CASCADE, related_name='user_curse')
+    user = models.OneToOneField(OtusUser, on_delete=models.CASCADE, related_name='user_name')
+    curse = models.ManyToManyField(Curse, related_name='user_curse')
     reserved_date_time = models.DateTimeField(auto_now_add=datetime.now)
 
     @property
