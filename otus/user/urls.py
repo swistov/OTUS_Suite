@@ -9,4 +9,6 @@ urlpatterns = [
     path('login/', views.UserLoginView.as_view(), name='login'),
     path('reserved/<int:pk>/', views.ReservedUserCurseView.as_view(), name='reserved_curses'),
     path('ress/<int:pk>/', views.ReserveCurseView.as_view()),
+    path('teacher/', views.TeacherListView.as_view()),
+    path('teacher/<int:pk>/', views.TeacherDetailListView.as_view()),
 ]

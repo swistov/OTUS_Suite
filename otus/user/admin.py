@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from user.models import ReservedCurse, OtusUser
+from user.models import ReservedCurse, OtusUser, Teacher
 
 
 @admin.register(ReservedCurse)
@@ -21,3 +21,10 @@ class OtusUserAdmin(admin.ModelAdmin):
 
     def first_name(self, obj):
         return obj.user.first_name
+
+
+@admin.register(Teacher)
+class TeacherAdmin(admin.ModelAdmin):
+    list_display = 'id', 'user', 'first_name'
+
+    search_fields = ["user__first_name"]

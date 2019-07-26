@@ -8,8 +8,8 @@ from rest_framework.views import APIView
 
 from user import serializers
 
-from user.models import ReservedCurse, OtusUser
-from user.serializers import ReservedUserCurseSerializer, OtusUserSerializer
+from user.models import ReservedCurse, OtusUser, Teacher
+from user.serializers import ReservedUserCurseSerializer, OtusUserSerializer, TeacherSerializer
 
 
 class UserCreateView(generics.CreateAPIView):
@@ -80,3 +80,19 @@ class UserInfoView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TeacherListView(APIView):
+
+    def get(self, request):
+        teacher = Teacher.objects.all()
+        serializer = TeacherSerializer(teacher, many=True)
+        return Response(serializer.data)
+
+
+class TeacherDetailListView(APIView):
+
+    def get(self, request, pk):
+        teacher = get_object_or_404(Teacher, pk=pk)
+        serializer = TeacherSerializer(teacher)
+        return Response(serializer.data)

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-from user.models import ReservedCurse, OtusUser
+from user.models import ReservedCurse, OtusUser, Teacher
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -46,3 +46,10 @@ class OtusUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = OtusUser
         fields = ('id', 'last_name', 'first_name', 'phone')
+
+
+class TeacherSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Teacher
+        fields = 'id', 'user', 'biography'

@@ -1,6 +1,6 @@
 from django.db import models
 
-from teacher.models import Teacher
+from user.models import Teacher
 
 
 class Curse(models.Model):

@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.db.models import Prefetch
 
 from main.models import Curse, Lesson, CurrencyRate
-from teacher.models import Teacher
+from user.models import Teacher
 
 
 @admin.register(Curse)
