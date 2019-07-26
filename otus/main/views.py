@@ -6,8 +6,6 @@ from rest_framework import status
 
 from main.models import Curse, Lesson
 from main.serializers import CurseSerializer, LessonSerializer, CursePostSerializer
-from user.models import ReservedCurse
-from user.serializers import ReservedCurseSerializer
 
 
 class CurseListView(APIView):
@@ -33,6 +31,7 @@ class CurseDetailListView(APIView):
     GET: return curse detail
     POST: reserved curse
     DELETE: delete curse
+    TODO: Create new serializer
     """
 
     def get(self, request, pk):

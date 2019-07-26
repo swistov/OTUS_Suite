@@ -8,8 +8,8 @@ from rest_framework.views import APIView
 
 from user import serializers
 
-from user.models import ReservedCurse, OtusUser, Teacher
-from user.serializers import ReservedUserCurseSerializer, OtusUserSerializer, TeacherSerializer
+from user.models import OtusUser, Teacher
+from user.serializers import OtusUserSerializer, TeacherSerializer
 
 
 class UserCreateView(generics.CreateAPIView):
@@ -30,33 +30,6 @@ class UserLoginView(APIView):
             return Response({'token': user.auth_token.key})
         else:
             return Response({'error': 'Wrong Credentials'}, status=status.HTTP_400_BAD_REQUEST)
-
-
-class ReservedUserCurseView(APIView):
-    """
-    TODO: Reserv curse
-    RETURN:
-    get: return all reserved user curses
-    pk: user_id
-    """
-    def get(self, request, pk):
-        curses = get_object_or_404(ReservedCurse, user=pk)
-        serializer = ReservedUserCurseSerializer(curses, many=True)
-        return Response(serializer.data)
-
-
-class ReserveCurseView(APIView):
-
-    def post(self, request, pk):
-        user = get_object_or_404(OtusUser, user=request.user)
-        curse = get_object_or_404(ReservedCurse, user=user)
-
-        if pk not in [p.id for p in curse.curse.all()]:
-            curse.curse.add(pk)
-            return Response(status=status.HTTP_201_CREATED)
-
-        return Response(data=f'User {request.user} already reserved this curse',
-                        status=status.HTTP_409_CONFLICT)
 
 
 class UserInfoView(APIView):
