@@ -1,12 +1,13 @@
 from django.db import models
 
-from user.models import Teacher
+from user.models import Teacher, OtusUser
 
 
 class Curse(models.Model):
     name = models.CharField(max_length=100, unique=True)
     descriptions = models.TextField()
     teachers = models.ManyToManyField(Teacher, related_name='teachers')
+    students = models.ManyToManyField(OtusUser, related_name='students', blank=True)
     add_date = models.DateTimeField(auto_now_add=True)
     date_time_release = models.DateTimeField()
     enabled = models.BooleanField(default=False)
@@ -22,14 +23,10 @@ class Lesson(models.Model):
     name = models.CharField(max_length=100, unique=True)
     curse = models.ForeignKey(Curse, on_delete=models.CASCADE)
     descriptions = models.TextField()
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='lesson_teacher')
+    teacher = models.ForeignKey(Teacher, on_delete=models.SET_DEFAULT, default=1, related_name='lesson_teacher')
     add_date = models.DateTimeField(auto_now_add=True)
     date_time_release = models.DateTimeField()
     enabled = models.BooleanField(default=False)
-
-    @property
-    def curse_name(self):
-        return self.curse.name
 
     class Meta:
         ordering = ['id']

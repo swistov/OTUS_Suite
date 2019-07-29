@@ -37,6 +37,7 @@ class CurrencyRateAdmin(admin.ModelAdmin):
     actions = ['update_currency_rates', ]
 
     def update_currency_rates(self, request, queryset):
+
         for rate in queryset:
             pair = '{}RUB'.format(rate.currency.upper())
             response = requests.get(
