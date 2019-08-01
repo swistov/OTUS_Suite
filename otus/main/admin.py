@@ -22,7 +22,7 @@ class CurseAdmin(admin.ModelAdmin):
         return qs
 
     def get_teachers_str(self, obj):
-        return ' '.join(obj.teachers.all().values_list("user__last_name", flat=True))
+        return ' '.join(obj.teachers.values_list("user__last_name", flat=True))
     get_teachers_str.short_description = 'Teachers'
 
 

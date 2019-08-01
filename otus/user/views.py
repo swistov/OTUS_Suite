@@ -36,7 +36,7 @@ class UserInfoView(APIView):
     permission_classes = AllowAny,
 
     def get(self, request, pk):
-        user = get_object_or_404(OtusUser, user=pk)
+        user = get_object_or_404(OtusUser, pk=pk)
         serializer = OtusUserSerializer(user)
         return Response(serializer.data)
 
