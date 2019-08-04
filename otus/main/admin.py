@@ -33,7 +33,6 @@ class LessonAdmin(admin.ModelAdmin):
 
 @admin.register(CurrencyRate)
 class CurrencyRateAdmin(admin.ModelAdmin):
-
     actions = ['update_currency_rates', ]
 
     def update_currency_rates(self, request, queryset):

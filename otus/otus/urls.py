@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('curse/', include('main.urls')),
     path('user/', include('user.urls')),
-    path('rq/', include('django_rq.urls'))
+    path('admin/rq/', include('django_rq.urls')),
 ]
 
 if settings.DEBUG:

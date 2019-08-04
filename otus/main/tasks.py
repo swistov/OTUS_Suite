@@ -1,17 +1,15 @@
 import requests
 from django.contrib.auth.models import User
-from django.contrib.sites.shortcuts import get_current_site
 
 from django_rq import job
 from email.mime.text import MIMEText
-from main.models import CurrencyRate
+from main.models import CurrencyRate, Lesson
 from smtplib import SMTP_SSL
 
 
 @job('default')
 def update_currency_rate():
     queryset = CurrencyRate.objects.all()
-
     for rate in queryset:
         pair = '{}RUB'.format(rate.currency.upper())
         response = requests.get(
@@ -26,7 +24,7 @@ def update_currency_rate():
 
 
 def send_email(email, subject, content):
-    fromaddr = 'example@example.com'
+    fromaddr = 'example@mail.ru'
     password = 'MySuperPassword'
 
     # Configuration message
@@ -60,3 +58,24 @@ def send_simple_message(username):
         return f'Mail send user {username}, email: {user.email}. JOB: {job}.'
     else:
         return f'Message not send. Username: {username}'
+
+
+@job('high')
+def send_reminder_letter(email, lesson_id):
+    try:
+        lesson = Lesson.objects.get(pk=lesson_id)
+        user = User.objects.get(email=email)
+    except:
+        print('Error')
+
+    subject = '[OTUS] Скоро начнётся урок'
+
+    content = f'''
+                Привет, {user.username}.
+                Продолжаем урок {lesson.curse.name}.
+                В {lesson.date_time_release.time()} начнётся урок {lesson.name}.
+                '''
+    if send_email(user.email, subject, content):
+        return f'Mail send user {user.username}, email: {user.email}. JOB: {job}.'
+    else:
+        return f'Message not send. Username: {user.username}'
