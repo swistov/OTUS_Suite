@@ -1,9 +1,3 @@
-# import os
-# import django
-# os.environ['DJANGO_SETTINGS_MODULE'] = 'otus.settings'
-# django.setup()
-
-
 import requests
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
@@ -31,29 +25,38 @@ def update_currency_rate():
     return True
 
 
+def send_email(email, subject, content):
+    fromaddr = 'example@example.com'
+    password = 'MySuperPassword'
+
+    # Configuration message
+    msg = MIMEText(content, 'html')
+    msg['From'] = fromaddr
+    msg['To'] = email
+    msg['Subject'] = subject
+
+    # Send e-mail
+    smtp = SMTP_SSL('smtp.mail.ru:465')
+    smtp.ehlo()
+    smtp.login(fromaddr, password)
+    smtp.sendmail(fromaddr, email, msg.as_string())
+    smtp.quit()
+    return True
+
+
 @job('high')
 def send_simple_message(username):
     user = User.objects.get(username=username)
     # domain = str(get_current_site(request)),
     token = user.auth_token.key
     domain = 'http://127.0.0.1:8000/'
-    fromaddr = 'example@example.com'
-    password = 'MySuperPassword'
+    subject = '[OTUS] Валидация e-mail'
 
     content = f''' Hi {username}.
                 Click to url for end registration.
                 <a href="{domain}user/verify/?user={username}&token={token}"><h4>VALIDATION</h4></a>'''
 
-    # Configuration message
-    msg = MIMEText(content, 'html')
-    msg['From'] = fromaddr
-    msg['To'] = user.email
-    msg['Subject'] = '[OTUS] Валидация e-mail'
-
-    # Send e-mail
-    smtp = SMTP_SSL('smtp.mail.ru:465')
-    smtp.ehlo()
-    smtp.login(fromaddr, password)
-    smtp.sendmail(fromaddr, user.email, msg.as_string())
-    smtp.quit()
-    return f'Mail send user {username}, email: {user.email}. JOB: {job}.'
+    if send_email(user.email, subject, content):
+        return f'Mail send user {username}, email: {user.email}. JOB: {job}.'
+    else:
+        return f'Message not send. Username: {username}'
