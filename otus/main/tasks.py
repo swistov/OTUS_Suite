@@ -17,6 +17,7 @@ from smtplib import SMTP_SSL
 @job('default')
 def update_currency_rate():
     queryset = CurrencyRate.objects.all()
+
     for rate in queryset:
         pair = '{}RUB'.format(rate.currency.upper())
         response = requests.get(
@@ -36,8 +37,8 @@ def send_simple_message(username):
     # domain = str(get_current_site(request)),
     token = user.auth_token.key
     domain = 'http://127.0.0.1:8000/'
-    fromaddr = 'swip88@bk.ru'
-    password = 'rfnvfylE1988'
+    fromaddr = 'example@example.com'
+    password = 'MySuperPassword'
 
     content = f''' Hi {username}.
                 Click to url for end registration.

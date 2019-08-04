@@ -7,11 +7,9 @@ redis_conn = Redis(host='195.201.131.110',
                    port=6379,
                    password='a5ff74c136c8e7b58f0850dfe19b15b70b75e8e22892da4d261131f7327dcd81')
 
-username = 'admin'
-
 
 @job('high', connection=redis_conn)
-def send_validation_message():
+def send_validation_message(username):
     send_job = send_simple_message.delay(username)
     return send_job
 

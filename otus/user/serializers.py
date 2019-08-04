@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
+from main.validations import send_validation_message
 from user.models import OtusUser, Teacher
 from main.models import Curse
 
@@ -28,6 +29,7 @@ class UserSerializer(serializers.ModelSerializer):
         user.is_active = False
         user.save()
         Token.objects.create(user=user)
+        send_validation_message(user.username)
         return user
 
 
