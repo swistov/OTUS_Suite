@@ -15,11 +15,17 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
+        """
+        TODO: Edit 'is_authenticated' -> False
+        :param validated_data:
+        :return: user
+        """
         user = User(
             email=validated_data['email'],
             username=validated_data['username']
         )
         user.set_password(validated_data['password'])
+        user.is_active = False
         user.save()
         Token.objects.create(user=user)
         return user

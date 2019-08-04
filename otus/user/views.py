@@ -1,4 +1,6 @@
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 from rest_framework import generics, status
 from rest_framework.generics import get_object_or_404
@@ -19,7 +21,7 @@ class UserCreateView(generics.CreateAPIView):
 
 
 class UserLoginView(APIView):
-    permission_classes = ()
+    permission_classes = [AllowAny]
 
     def post(self, request):
         username = request.data.get('username')
@@ -33,7 +35,7 @@ class UserLoginView(APIView):
 
 
 class UserInfoView(APIView):
-    permission_classes = AllowAny,
+    permission_classes = [AllowAny]
 
     def get(self, request, pk):
         user = get_object_or_404(OtusUser, pk=pk)
@@ -69,3 +71,27 @@ class TeacherDetailListView(APIView):
         teacher = get_object_or_404(Teacher, pk=pk)
         serializer = TeacherSerializer(teacher)
         return Response(serializer.data)
+
+
+class UserVerifyView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request):
+        user = request.GET.get('user', None)
+        token = request.GET.get('token', None)
+
+        if not user or not token:
+            return Response({'Error': 'You must send user name and token'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            user = get_object_or_404(User, username=user)
+        except:
+            return Response({'Error': 'User not register'}, status=status.HTTP_404_NOT_FOUND)
+
+        if user.is_active:
+            return Response({'OK': 'User is active'}, status=status.HTTP_202_ACCEPTED)
+
+        user.is_active = True
+        user.save()
+
+        return Response({'Apply': 'User activated'}, status=status.HTTP_200_OK)

@@ -1,3 +1,4 @@
+redis
 Django
 django-debug-toolbar
 djangorestframework
