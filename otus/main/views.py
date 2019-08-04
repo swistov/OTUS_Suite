@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -9,6 +10,7 @@ from main.serializers import CurseSerializer, LessonSerializer, CursePostSeriali
 
 
 class CurseListView(APIView):
+    permission_classes = [AllowAny]
 
     def get(self, request):
         curses = Curse.objects.all().filter(enabled=True).select_related()
@@ -17,6 +19,7 @@ class CurseListView(APIView):
 
 
 class CurseCreateView(APIView):
+    permission_classes = [IsAuthenticated],
 
     def post(self, request):
         serializer = CursePostSerializer(data=request.data)

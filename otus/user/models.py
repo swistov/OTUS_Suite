@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.datetime_safe import datetime
 
 
 class OtusUser(models.Model):
@@ -15,7 +14,6 @@ class OtusUser(models.Model):
 
 
 class Teacher(models.Model):
-
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     biography = models.TextField(max_length=500, blank=True)
 
