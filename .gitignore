@@ -1,9 +1,9 @@
 .venv
 *.db
 *.sqlite3
-*00*.py
+#*00*.py
 */migraions/*
-*migraions*
+*migrations*
 .DS_STORE
 
 # Virtualenv related
