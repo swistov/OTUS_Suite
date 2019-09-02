@@ -10,6 +10,7 @@ from smtplib import SMTP_SSL
 @job('default')
 def update_currency_rate():
     queryset = CurrencyRate.objects.all()
+
     for rate in queryset:
         pair = '{}RUB'.format(rate.currency.upper())
         response = requests.get(
