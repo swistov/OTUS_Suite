@@ -1,16 +1,16 @@
 from datetime import datetime, timedelta
 
 from django.utils import timezone
-
+from django.conf import settings
 from main.models import Lesson
 from main.tasks import send_simple_message, send_reminder_letter
 from redis import Redis
 from django_rq import job
 
 
-redis_conn = Redis(host='195.201.131.110',
-                   port=6379,
-                   password='a5ff74c136c8e7b58f0850dfe19b15b70b75e8e22892da4d261131f7327dcd81')
+redis_conn = Redis(host=settings.REDIS_HOST,
+                   port=settings.REDIS_PORT,
+                   password=settings.REDIS_PASSWORD)
 
 
 @job('high', connection=redis_conn)
