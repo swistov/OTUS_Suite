@@ -1,8 +1,6 @@
 .venv
 *.db
 *.sqlite3
-#*00*.py
-*/migraions/*
 *migrations*
 .DS_STORE
 
