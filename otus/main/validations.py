@@ -21,13 +21,14 @@ def send_validation_message(username):
 
 @job('default', connection=redis_conn)
 def reminder_letter():
-    for lesson in Lesson.objects.all().filter(enabled=True):
-        delta = datetime.now(timezone.utc)-lesson.date_time_release
-        if delta.seconds < 3600 and lesson.curse.enabled:
-            for student in lesson.curse.students.prefetch_related():
-                send_reminder_letter.delay(student.user.email, lesson.id)
-                return f'Message send to {student}'
-        return f'Not lessons'
+    time_delta = datetime.now(timezone.utc) - timedelta(hours=1)
+    for lesson in Lesson.objects.all().filter(enabled=True,
+                                              date_time_release__range=(time_delta, datetime.now(timezone.utc))):
+
+        for student in lesson.curse.students.prefetch_related():
+            send_reminder_letter.delay(student.user.email, lesson.id)
+            return f'Message send to {student}'
+    return f'Not lessons'
 
 
 # schedule = django_rq.get_scheduler('default')
