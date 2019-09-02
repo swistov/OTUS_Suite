@@ -19,9 +19,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('curse/', include('main.urls')),
-    path('user/', include('user.urls')),
     path('admin/rq/', include('django_rq.urls')),
+    path('api/v1.0/curse/', include('main.urls')),
+    path('api/v1.0/user/', include('user.urls')),
 ]
 
 if settings.DEBUG:
