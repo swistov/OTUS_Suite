@@ -30,8 +30,8 @@ class UserLoginView(APIView):
 
         if user:
             return Response({'token': user.auth_token.key})
-        else:
-            return Response({'error': 'Wrong Credentials'}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({'error': 'Wrong Credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserInfoView(APIView):

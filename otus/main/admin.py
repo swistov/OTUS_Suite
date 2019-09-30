@@ -39,9 +39,12 @@ class CurrencyRateAdmin(admin.ModelAdmin):
 
         for rate in queryset:
             pair = '{}RUB'.format(rate.currency.upper())
-            response = requests.get(
-                'https://www.freeforexapi.com/api/live?pairs={}'.format(pair)
-            )
+            try:
+                response = requests.get(
+                    'https://www.freeforexapi.com/api/live?pairs={}'.format(pair)
+                )
+            except ConnectionError as e:
+                return 'Bad request. Error: {}'.format(e)
 
             data = response.json()
             rate.rate = data['rates'][pair]['rate']

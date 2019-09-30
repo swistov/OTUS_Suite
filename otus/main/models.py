@@ -1,5 +1,4 @@
 from django.db import models
-
 from user.models import Teacher, OtusUser
 
 
@@ -54,6 +53,6 @@ class CurrencyRate(models.Model):
                 rate = CurrencyRate.objects.get(currency=self.currency)
                 self.pk = rate.pk
             except CurrencyRate.DoesNotExist:
-                pass
+                return 'Currency not exists'
 
         super().save(*args, **kwargs)

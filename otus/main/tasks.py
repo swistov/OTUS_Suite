@@ -78,5 +78,5 @@ def send_reminder_letter(email, lesson_id):
                 '''
     if send_email(user.email, subject, content):
         return f'Mail send user {user.username}, email: {user.email}. JOB: {job}.'
-    else:
-        return f'Message not send. Username: {user.username}'
+
+    return f'Message not send. Username: {user.username}'

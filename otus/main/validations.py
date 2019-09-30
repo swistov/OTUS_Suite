@@ -31,6 +31,9 @@ def reminder_letter():
     return f'Not lessons'
 
 
+# TODO
+# Command for start worker
+
 # schedule = django_rq.get_scheduler('default')
 # schedule.get_jobs()
 
