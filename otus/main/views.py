@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -30,6 +30,7 @@ class CurseCreateView(APIView):
 
 
 class CurseDetailListView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
     """
     GET: return curse detail
     POST: reserved curse

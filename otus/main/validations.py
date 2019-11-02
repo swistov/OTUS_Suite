@@ -7,7 +7,6 @@ from main.tasks import send_simple_message, send_reminder_letter
 from redis import Redis
 from django_rq import job
 
-
 redis_conn = Redis(host=settings.REDIS_HOST,
                    port=settings.REDIS_PORT,
                    password=settings.REDIS_PASSWORD)
