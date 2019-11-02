@@ -36,6 +36,7 @@ class CurseDetailListView(APIView):
     POST: reserved curse
     DELETE: delete curse
     TODO: Create new serializer
+
     """
 
     def get(self, request, pk):
