@@ -44,15 +44,18 @@ class CurrencyRate(models.Model):
     currency = models.CharField(max_length=3, choices=CURRENIES)
     rate = models.DecimalField(max_digits=10, decimal_places=6, default=1)
 
+    class Meta:
+        ordering = ['id']
+
     def __str__(self):
         return f'{self.currency} ({self.rate})'
 
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            try:
-                rate = CurrencyRate.objects.get(currency=self.currency)
-                self.pk = rate.pk
-            except CurrencyRate.DoesNotExist:
-                return 'Currency not exists'
-
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if not self.pk:
+    #         try:
+    #             rate = CurrencyRate.objects.get(currency=self.currency)
+    #             self.pk = rate.pk
+    #         except CurrencyRate.DoesNotExist:
+    #             return 'Currency not exists'
+    #
+    #     super().save(*args, **kwargs)

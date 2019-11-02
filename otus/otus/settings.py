@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_rq',
 
-    'main.apps.AppmainConfig',
+    'main.apps.AppMainConfig',
     'user.apps.AppUserConfig',
 
 ]

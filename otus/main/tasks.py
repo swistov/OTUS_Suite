@@ -7,20 +7,22 @@ from main.models import CurrencyRate, Lesson
 from smtplib import SMTP_SSL
 
 
+def get_currency_rate(currency):
+    pair = '{}RUB'.format(currency.upper())
+    response = requests.get(
+        'https://www.freeforexapi.com/api/live?pairs={}'.format(pair)
+    )
+
+    data = response.json()
+    return data['rates'][pair]['rate']
+
+
 @job('default')
-def update_currency_rate():
+def update_currency_rates():
     queryset = CurrencyRate.objects.all()
-
     for rate in queryset:
-        pair = '{}RUB'.format(rate.currency.upper())
-        response = requests.get(
-            'https://www.freeforexapi.com/api/live?pairs={}'.format(pair)
-        )
-
-        data = response.json()
-        rate.rate = data['rates'][pair]['rate']
+        rate.rate = get_currency_rate(rate.currency)
         rate.save(update_fields=['rate'])
-
     return True
 
 
